@@ -9,6 +9,7 @@ pipeline {
         choice(choices: ['Dev', 'Test', 'Stage', 'Prod'], description: 'Select env', name: 'Environment')
         choice(choices: ['master', 'feature', 'enhancement'], description: 'Select Branch env', name: 'Branch Name')
         string(defaultValue: "0.0.0.0-SNAPSHOT", description: 'Enter your Version number ', name: 'VERSION')
+	string(defaultValue: "maven-snapshots", description: 'Enter your Nexus artifact Repo Name ', name: 'REPOSITORY')
     }
     
     tools {
@@ -23,7 +24,7 @@ pipeline {
         // Where your Nexus is running
         NEXUS_URL = "192.168.1.55:8081"
         // Repository where we will upload the artifact
-        NEXUS_REPOSITORY = "maven-snapshots"
+        //NEXUS_REPOSITORY = "maven-snapshots"
         // Jenkins credential id to authenticate to Nexus OSS
         NEXUS_CREDENTIAL_ID = "nexus-credentials"
     }
@@ -66,7 +67,7 @@ pipeline {
                             nexusUrl: NEXUS_URL,
                             groupId: pom.groupId,
                             version: "${params.VERSION}",
-                            repository: NEXUS_REPOSITORY,
+                            repository: "${params.REPOSITORY}",
                             credentialsId: NEXUS_CREDENTIAL_ID,
                             artifacts: [
                                 // Artifact generated such as .jar, .ear and .war files.
