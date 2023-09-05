@@ -217,8 +217,7 @@
                                 <!-- This is needed to tell the unit tests which profile
                                 we are running. -->
                                 <profileId>${project.activeProfiles[0].id}</profileId>
-                                <!-- This is needed to tell Arquillian which profile
-                                we are running. -->
+                                <!-- This is needed to tell Arquillian which profile we are running. -->
                                 <arquillian.launch>${project.activeProfiles[0].id}</arquillian.launch>
                             </systemPropertyVariables>
                         </configuration>
